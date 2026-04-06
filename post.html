@@ -6,17 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post a Job | FIX-IT</title>
   <link rel="stylesheet" href="assets/css/post.css">
+  <link rel="stylesheet" href="assets/css/toast.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <video autoplay loop muted playsinline class="background-clip">
-    <source src="assets/videos/po.mp4" type="video/mp4">
-  </video>
+  <!-- ALL content hidden until auth check passes -->
+  <div id="page-content" style="display: none;">
+    <video autoplay loop muted playsinline class="background-clip">
+      <source src="assets/videos/po.mp4" type="video/mp4">
+    </video>
 
-  <a href="index.html" class="back-btn">⬅ Back</a>
+    <a href="index.html" class="back-btn">⬅ Back</a>
 
-  <div class="container">
+    <!-- Job form container -->
+    <div class="container" id="job-container">
     <h2>Post a Job</h2>
     <form id="jobForm">
       <label>Job Title</label>
@@ -50,8 +58,74 @@
     </form>
     <div class="success" id="successMsg"></div>
   </div>
+  </div> <!-- /page-content -->
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-init.js"></script>
   <script>
+    // ============================================
+    // Access Control: Only Clients can post jobs
+    // ============================================
+    (async () => {
+      const user = await getCurrentUser();
+
+      if (!user) {
+        // Not logged in — show must-login overlay
+        showAccessDenied(
+          'Login Required',
+          'You need to login first to post a job. Create an account or login to continue.',
+          'bxs-lock-alt',
+          [
+            { text: 'Login Now', href: 'login.html', cls: 'primary' },
+            { text: 'Go Home', href: 'index.html', cls: 'secondary' }
+          ]
+        );
+        return;
+      }
+
+      const profile = await getUserProfile(user.id);
+      const userType = profile?.user_type;
+
+      if (userType !== 'Client') {
+        // Worker trying to access — show denied overlay
+        showAccessDenied(
+          'Access Denied',
+          'Only Clients can post jobs. As a Worker, you can browse and apply for available jobs instead.',
+          'bxs-shield-x',
+          [
+            { text: 'Find Work', href: '#', cls: 'primary' },
+            { text: 'Go Home', href: 'index.html', cls: 'secondary' }
+          ]
+        );
+        return;
+      }
+
+      // Client — show the entire page
+      document.getElementById('page-content').style.display = '';
+    })();
+
+    function showAccessDenied(title, message, icon, buttons) {
+      const overlay = document.createElement('div');
+      overlay.className = 'access-denied-overlay';
+
+      let btnsHtml = buttons.map(b =>
+        `<a href="${b.href}" class="ad-btn ${b.cls}">${b.text}</a>`
+      ).join('');
+
+      overlay.innerHTML = `
+        <div class="access-denied-card">
+          <div class="ad-icon"><i class='bx ${icon}'></i></div>
+          <h2>${title}</h2>
+          <p>${message}</p>
+          <div>${btnsHtml}</div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    // ============================================
+    // Job Form Validation (existing logic)
+    // ============================================
     const form = document.getElementById("jobForm");
     form.addEventListener("submit", function (e) {
       e.preventDefault();

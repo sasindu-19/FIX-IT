@@ -4,12 +4,18 @@
     font-family: sans-serif;
 }
 
+html, body {
+    height: 100%;
+}
+
 .banner {
     width: 100%;
-    height: auto;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75)), url(../images/office-supplies.webp);
+    min-height: 100vh;
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../images/office-supplies.webp);
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 }
 
 .back-videos {
@@ -141,9 +147,11 @@ button:hover {
 
 .und {
     color: #fff;
-    margin-top: 800;
     text-align: center;
-    height: 40;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
 }
 
 img {
