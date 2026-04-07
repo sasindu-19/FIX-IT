@@ -15,7 +15,6 @@
 
 <body>
 
-  <!-- ALL content hidden until auth check passes -->
   <div id="page-content" style="display: none;">
     <video autoplay loop muted playsinline class="background-clip">
       <source src="assets/videos/po.mp4" type="video/mp4">
@@ -70,7 +69,6 @@
       const user = await getCurrentUser();
 
       if (!user) {
-        // Not logged in — show must-login overlay
         showAccessDenied(
           'Login Required',
           'You need to login first to post a job. Create an account or login to continue.',
@@ -87,7 +85,6 @@
       const userType = profile?.user_type;
 
       if (userType !== 'client') {
-        // Worker trying to access — show denied overlay
         showAccessDenied(
           'Access Denied',
           'Only Clients can post jobs. As a Worker, you can browse and apply for available jobs instead.',
@@ -100,7 +97,6 @@
         return;
       }
 
-      // Client — show the entire page
       document.getElementById('page-content').style.display = '';
     })();
 
@@ -124,7 +120,7 @@
     }
 
     // ============================================
-    // Job Form Validation (existing logic)
+    // Job Form Validation 
     // ============================================
     const form = document.getElementById("jobForm");
     form.addEventListener("submit", function (e) {

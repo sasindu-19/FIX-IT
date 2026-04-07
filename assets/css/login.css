@@ -336,23 +336,21 @@ body {
         overflow-y: auto;
     }
     .wrapper .bg-animate, .wrapper .bg-animate2 {
-        display: none; /* Remove background animating shapes on mobile */
+        display: none;
     }
     .wrapper .info-text {
-        display: none; /* Hide the large greeting text on mobile */
+        display: none; 
     }
     .wrapper .form-box {
         position: relative;
         width: 100%;
         height: auto;
     }
-    
-    /* Reset padding and placement */
+
     .wrapper .form-box.login, .wrapper .form-box.register {
         padding: 40px 20px;
     }
 
-    /* Override animation behavior for mobile toggles */
     .wrapper .form-box.login {
         display: flex;
     }
@@ -371,7 +369,6 @@ body {
         transform: translateX(0);
     }
 
-    /* Cancel delays so it toggles instantly on mobile */
     .wrapper .form-box.login .animation, 
     .wrapper .form-box.register .animation {
         transition: none !important;
