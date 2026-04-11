@@ -1,7 +1,3 @@
-// ============================================================
-// TOAST NOTIFICATION SYSTEM (uses toast.css classes)
-// ============================================================
-
 /**
  * Show a toast notification.
  * @param {string} message
@@ -11,9 +7,9 @@
 function showToast(message, type = 'info', duration = 4000) {
   const icons = {
     success: 'bx bx-check-circle',
-    error:   'bx bx-error-circle',
+    error: 'bx bx-error-circle',
     warning: 'bx bx-error',
-    info:    'bx bx-info-circle',
+    info: 'bx bx-info-circle',
   };
 
   const toast = document.createElement('div');
@@ -50,7 +46,7 @@ function setValid(fieldId) {
   const el = document.getElementById(fieldId);
   if (!el) return;
   el.style.borderColor = '';
-  el.style.boxShadow  = '';
+  el.style.boxShadow = '';
   const msg = el.parentElement.querySelector('.field-error');
   if (msg) msg.remove();
 }
@@ -60,7 +56,7 @@ function setError(fieldId, message) {
   const el = document.getElementById(fieldId);
   if (!el) return;
   el.style.borderColor = 'rgba(239,68,68,.6)';
-  el.style.boxShadow   = '0 0 0 3px rgba(239,68,68,.12)';
+  el.style.boxShadow = '0 0 0 3px rgba(239,68,68,.12)';
 
   // Remove old error msg if any
   const existing = el.parentElement.querySelector('.field-error');
@@ -92,20 +88,20 @@ function validateField(fieldId, rules) {
 // Validation rule sets per field
 const RULES = {
   jobTitle: [
-    { test: v => v.length > 0,  message: 'Job title is required.' },
+    { test: v => v.length > 0, message: 'Job title is required.' },
     { test: v => v.length >= 5, message: 'Title must be at least 5 characters.' },
   ],
   description: [
-    { test: v => v.length > 0,  message: 'Description is required.' },
+    { test: v => v.length > 0, message: 'Description is required.' },
     { test: v => v.length >= 20, message: 'Please describe the job in at least 20 characters.' },
   ],
   payRate: [
-    { test: v => v.length > 0,     message: 'Pay rate is required.' },
+    { test: v => v.length > 0, message: 'Pay rate is required.' },
     { test: v => !isNaN(v) && +v > 0, message: 'Enter a valid amount greater than 0.' },
-    { test: v => +v >= 100,        message: 'Minimum pay rate is Rs. 100.' },
+    { test: v => +v >= 100, message: 'Minimum pay rate is Rs. 100.' },
   ],
   bizReg: [
-    { test: v => v.length > 0,    message: 'Business registration number is required.' },
+    { test: v => v.length > 0, message: 'Business registration number is required.' },
   ],
 };
 
@@ -130,17 +126,17 @@ function attachRealtimeValidation(fieldId, rules) {
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Preview element refs ──
-  const prevTitle    = document.getElementById('prevTitle');
+  const prevTitle = document.getElementById('prevTitle');
   const prevLocation = document.getElementById('prevLocation');
-  const prevPay      = document.getElementById('prevPay');
-  const prevDiff     = document.getElementById('prevDiff');
-  const prevGender   = document.getElementById('prevGender');
-  const prevAge      = document.getElementById('prevAge');
-  const prevBiz      = document.getElementById('prevBiz');
+  const prevPay = document.getElementById('prevPay');
+  const prevDiff = document.getElementById('prevDiff');
+  const prevGender = document.getElementById('prevGender');
+  const prevAge = document.getElementById('prevAge');
+  const prevBiz = document.getElementById('prevBiz');
 
   // Reset placeholder previews
   prevTitle.textContent = 'Job Title';
-  prevPay.textContent   = 'Rs. —';
+  prevPay.textContent = 'Rs. —';
 
   // ── Cascading Location Dropdowns ──
   initLocationDropdowns('province', 'district', 'city', (province, district, city) => {
@@ -184,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       prevDiff.textContent = val;
       prevDiff.removeAttribute('class');
       prevDiff.removeAttribute('style');
-      if (val === 'Easy')   prevDiff.classList.add('tag-easy');
+      if (val === 'Easy') prevDiff.classList.add('tag-easy');
       if (val === 'Medium') prevDiff.classList.add('tag-age');
       if (val === 'Hard') {
         prevDiff.style.cssText =
@@ -217,8 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const bizRegBox = document.getElementById('bizRegBox');
   setupGroup('postingGroup', val => {
     const isBiz = val === 'Business';
-    bizRegBox.style.display = isBiz ? 'block'        : 'none';
-    prevBiz.style.display   = isBiz ? 'inline-block' : 'none';
+    bizRegBox.style.display = isBiz ? 'block' : 'none';
+    prevBiz.style.display = isBiz ? 'inline-block' : 'none';
     // Attach biz validation only when visible
     if (isBiz) {
       attachRealtimeValidation('bizReg', RULES.bizReg);
@@ -229,9 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Workers Counter ──
   let workerCount = 1;
-  const cVal   = document.getElementById('c-val');
+  const cVal = document.getElementById('c-val');
   const cMinus = document.getElementById('c-minus');
-  const cPlus  = document.getElementById('c-plus');
+  const cPlus = document.getElementById('c-plus');
   cMinus?.addEventListener('click', () => {
     if (workerCount > 1) cVal.textContent = --workerCount;
   });
@@ -254,13 +250,13 @@ document.addEventListener('DOMContentLoaded', () => {
       'bxs-lock-alt',
       [
         { text: 'Login Now', href: 'login.html', cls: 'primary' },
-        { text: 'Go Home',   href: 'index.html', cls: 'secondary' }
+        { text: 'Go Home', href: 'index.html', cls: 'secondary' }
       ]
     );
     return;
   }
 
-  const profile  = await getUserProfile(user.id);
+  const profile = await getUserProfile(user.id);
   const userType = profile?.user_type;
 
   if (userType !== 'client') {
@@ -269,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'Only Clients can post jobs. As a Worker, you can browse and apply for available jobs instead.',
       'bxs-shield-x',
       [
-        { text: 'Find Work', href: 'jobs.html',  cls: 'primary' },
-        { text: 'Go Home',   href: 'index.html', cls: 'secondary' }
+        { text: 'Find Work', href: 'jobs.html', cls: 'primary' },
+        { text: 'Go Home', href: 'index.html', cls: 'secondary' }
       ]
     );
     return;
@@ -307,25 +303,25 @@ function showAccessDenied(title, message, icon, buttons) {
 document.getElementById('jobForm')?.addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const title    = document.getElementById('jobTitle').value.trim();
-  const desc     = document.getElementById('description').value.trim();
+  const title = document.getElementById('jobTitle').value.trim();
+  const desc = document.getElementById('description').value.trim();
   const category = document.getElementById('category').value;
-  const budget   = document.getElementById('payRate').value;
+  const budget = document.getElementById('payRate').value;
   const province = document.getElementById('province').value;
   const district = document.getElementById('district').value;
-  const city     = document.getElementById('city').value;
-  const diff     = document.querySelector('.diff-card.active')?.dataset.value || 'Easy';
-  const gender   = document.querySelector('#genderGroup .active')?.dataset.value || 'Any Gender';
-  const posting  = document.querySelector('#postingGroup .active')?.dataset.value || 'Individual';
-  const bizReg   = document.getElementById('bizReg')?.value || '';
-  const minAge   = document.getElementById('minAge').value;
-  const workers  = document.getElementById('c-val').textContent;
+  const city = document.getElementById('city').value;
+  const diff = document.querySelector('.diff-card.active')?.dataset.value || 'Easy';
+  const gender = document.querySelector('#genderGroup .active')?.dataset.value || 'Any Gender';
+  const posting = document.querySelector('#postingGroup .active')?.dataset.value || 'Individual';
+  const bizReg = document.getElementById('bizReg')?.value || '';
+  const minAge = document.getElementById('minAge').value;
+  const workers = document.getElementById('c-val').textContent;
 
   // ── Run all validations, collect failures ──
   const checks = [
-    validateField('jobTitle',    RULES.jobTitle),
+    validateField('jobTitle', RULES.jobTitle),
     validateField('description', RULES.description),
-    validateField('payRate',     RULES.payRate),
+    validateField('payRate', RULES.payRate),
     ...(posting === 'Business' ? [validateField('bizReg', RULES.bizReg)] : []),
   ];
 
@@ -333,7 +329,7 @@ document.getElementById('jobForm')?.addEventListener('submit', async function (e
   const locationErrors = [];
   if (!province) locationErrors.push('Province');
   if (!district) locationErrors.push('District');
-  if (!city)     locationErrors.push('City / Area');
+  if (!city) locationErrors.push('City / Area');
 
   if (locationErrors.length) {
     showToast(`Please select: ${locationErrors.join(', ')}.`, 'warning');
