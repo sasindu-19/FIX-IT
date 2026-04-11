@@ -2,145 +2,268 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIX-IT | Connecting Skills to Opportunities</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/toast.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
-    <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
-    <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIX-IT | Connecting Skills to Opportunities</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/toast.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <div class="banner">
-        <div class="navbar">
-            <h1 class="logo"><a href="index.html">FIX-IT</a></h1>
-            <ul>
-                <li><a href="about.html">About</a></li>
-                <li><a href="jobs.html">Find Work</a></li>
-                <li id="post-job-link"><a href="post.html">Post A Job</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-            </ul>
 
-            <!-- Login Button (shown when NOT logged in) -->
-            <a href="login.html" id="login-btn-link"><button class="lg">Login</button></a>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="#">FIX-IT</a></div>
+      <ul class="links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="jobs.html">Find Work</a></li>
+        <li id="post-job-link"><a href="post.html">Post a Job</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+      </ul>
 
-            <!-- Profile Area (shown when logged in) -->
-            <div class="profile-area" id="profile-area" style="display: none;">
-                <div class="profile-btn" id="profile-toggle">
-                    <div class="profile-avatar" id="profile-avatar">?</div>
-                    <div>
-                        <div class="profile-name" id="profile-display-name">Loading...</div>
-                        <div class="profile-type" id="profile-display-type">—</div>
-                    </div>
-                    <i class='bx bx-chevron-down' style="color: rgba(255,255,255,0.5); font-size: 18px;"></i>
-                </div>
-                <div class="profile-dropdown" id="profile-dropdown">
-                    <div class="dropdown-header">
-                        <div class="dh-name" id="dd-name"></div>
-                        <div class="dh-email" id="dd-email"></div>
-                        <span class="dh-badge" id="dd-badge"></span>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <i class='bx bxs-user'></i> My Profile
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item logout" id="logout-btn">
-                        <i class='bx bx-log-out'></i> Logout
-                    </button>
-                </div>
-            </div>
+      <!-- Login Button -->
+      <a href="login.html" id="login-btn-link" class="action_btn">Login</a>
+
+      <!-- Profile Area -->
+      <div class="profile-area" id="profile-area" style="display: none;">
+        <div class="profile-btn" id="profile-toggle">
+          <div class="profile-avatar" id="profile-avatar">?</div>
+          <div>
+            <div class="profile-name" id="profile-display-name">Loading...</div>
+            <div class="profile-type" id="profile-display-type">—</div>
+          </div>
+          <i class='bx bx-chevron-down' style="color: rgba(255,255,255,0.5); font-size: 18px;"></i>
         </div>
-
-        <div class="content">
-            <h1>Connecting Skills to <span class="text600">Opportunities</span></h1>
-            <h3>The ultimate marketplace for part-time gigs. Whether you're fixing a <p>sink or coding a site, FIX-IT
-                    gets it done.</p>
-            </h3>
-            <div class="btnn">
-                <a href="jobs.html"><span></span><span></span><span></span><span></span>I Want to Work</a>
-            </div>
-            <div class="btnn1">
-                <a href="help.html"><span></span><span></span><span></span><span></span>I Need Help</a>
-            </div>
+        <div class="profile-dropdown" id="profile-dropdown">
+          <div class="dropdown-header">
+            <div class="dh-name" id="dd-name"></div>
+            <div class="dh-email" id="dd-email"></div>
+            <span class="dh-badge" id="dd-badge"></span>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="profile.html">
+            <i class='bx bxs-user'></i> My Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item logout" id="logout-btn">
+            <i class='bx bx-log-out'></i> Logout
+          </a>
         </div>
+      </div>
 
-        <div class="und">
-            <h4>&copy; 2024 FIX-IT MarketPlace. All Rights Reserved</h4>
-        </div>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/supabase-init.js"></script>
-    <script>
-        // ============================================
-        // Index Page Auth Logic
-        // ============================================
-        (async () => {
-            const user = await getCurrentUser();
+    <div class="dropdown_menu">
+      <li><a href="about.html">About</a></li>
+      <li><a href="jobs.html">Find Work</a></li>
+      <li id="post-job-link-mobile"><a href="post.html">Post a Job</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+    </div>
+  </header>
 
-            const loginBtnLink = document.getElementById('login-btn-link');
-            const profileArea = document.getElementById('profile-area');
-            const postJobLink = document.getElementById('post-job-link');
 
-            if (user) {
-                // User is logged in
-                loginBtnLink.style.display = 'none';
-                profileArea.style.display = 'flex';
+  <section class="hme">
+    <div class="content">
+      <h1>Connecting Skills to <span class="text600">Opportunities</span></h1>
+      <h3>The ultimate marketplace for part-time gigs. Whether you're fixing a
+        <p>sink or coding a site, FIX-IT gets it done.</p>
+      </h3>
 
-                const profile = await getUserProfile(user.id);
-                const name = profile?.full_name || user.email.split('@')[0];
-                const type = profile?.user_type || 'User';
-                const email = user.email;
-                const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2);
+      <!-- ✅ Wrapper div added — buttons now flex on mobile -->
+      <div class="hero-btns-wrap">
+        <div class="btnn">
+          <a href="jobs.html"><span></span><span></span><span></span><span></span>I Want to Work</a>
+        </div>
+        <div class="btnn1">
+          <a href="help.html"><span></span><span></span><span></span><span></span>I Need Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                // Add title case for display purposes
-                const displayType = type.charAt(0).toUpperCase() + type.slice(1);
 
-                // Set profile button info
-                document.getElementById('profile-avatar').textContent = initials;
-                document.getElementById('profile-display-name').textContent = name;
-                document.getElementById('profile-display-type').textContent = displayType;
+  <section class="how-it-works">
+    <div class="container">
+      <span class="tag">⚙ HOW IT WORKS</span>
+      <h1>Get Started in 3 Simple Steps</h1>
+      <p class="subtitle">
+        Whether you're hiring or looking for work, FIX-IT makes the process seamless and fast.
+      </p>
 
-                // Set dropdown info
-                document.getElementById('dd-name').textContent = name;
-                document.getElementById('dd-email').textContent = email;
+      <div class="steps">
+        <div class="card">
+          <div class="number">1</div>
+          <h3>Create Your Profile</h3>
+          <p>Sign up in seconds. Tell us your skills or what kind of help you need. It's completely free.</p>
+          <a href="login.html">Open</a>
+        </div>
+        <div class="card">
+          <div class="number">2</div>
+          <h3>Browse or Post Jobs</h3>
+          <p>Explore hundreds of part-time gigs or post your own job listing. Find the perfect match instantly.</p>
+        </div>
+        <div class="card">
+          <div class="number">3</div>
+          <h3>Connect & Get Hired</h3>
+          <p>Apply with one click, chat directly, and start working. Secure payments ensure peace of mind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                const badge = document.getElementById('dd-badge');
-                badge.textContent = displayType;
-                badge.className = 'dh-badge ' + type.toLowerCase();
 
-                // Hide "Post A Job" nav link for Workers
-                if (type.toLowerCase() === 'worker') {
-                    postJobLink.style.display = 'none';
-                }
+  <section class="features">
+    <div class="feature-box">
+      <div class="icon">
+        <i class="fa-solid fa-user-group"></i>
+      </div>
+      <div class="contentii">
+        <h3>More than <span>500,000+</span> job seekers</h3>
+        <p>Sri Lankans and non-Sri Lankans in different sectors and experience levels</p>
+      </div>
+    </div>
 
-                // Profile dropdown toggle
-                document.getElementById('profile-toggle').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    document.getElementById('profile-dropdown').classList.toggle('show');
-                });
+    <div class="feature-box">
+      <div class="icon">
+        <i class="fa-solid fa-clock"></i>
+      </div>
+      <div class="contentii">
+        <h3>Takes less time to find the next hire</h3>
+        <p>Applicants matching your requirements in less than 24 hours</p>
+      </div>
+    </div>
 
-                // Close dropdown on outside click
-                document.addEventListener('click', () => {
-                    document.getElementById('profile-dropdown').classList.remove('show');
-                });
+    <div class="feature-box">
+      <div class="icon">
+        <i class="fa-solid fa-wallet"></i>
+      </div>
+      <div class="contentii">
+        <h3>Cost effective</h3>
+        <p>Pricing plans that suit your hiring needs</p>
+      </div>
+    </div>
+  </section>
 
-                // Logout
-                document.getElementById('logout-btn').addEventListener('click', async () => {
-                    await logoutUser();
-                });
-            } else {
-                // Not logged in
-                loginBtnLink.style.display = '';
-                profileArea.style.display = 'none';
+
+  <footer class="footer">
+    <div class="footer-container">
+      <img src="assets/images/logo.webp" alt="" class="logo">
+
+      <div class="footer-brand">
+        <h2>FIX-IT</h2>
+        <p>Connecting skills to opportunities. Get things done faster.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="jobs.html">Find Work</a></li>
+          <li><a href="post.html">Post a Job</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 FIX-IT. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <script>
+    const toggleBtn = document.querySelector('.toggle_btn')
+    const toggleBtnIcon = document.querySelector('.toggle_btn i')
+    const dropDownMenu = document.querySelector('.dropdown_menu')
+
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle('open')
+      const isOpen = dropDownMenu.classList.contains('open')
+      toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-init.js"></script>
+  <script>
+      (async () => {
+        const user = await getCurrentUser();
+        const loginBtnLink = document.getElementById('login-btn-link');
+        const profileArea = document.getElementById('profile-area');
+
+        if (user) {
+          loginBtnLink.style.display = 'none';
+          profileArea.style.display = 'flex';
+
+          const profile = await getUserProfile(user.id);
+          const name = profile?.full_name || user.email.split('@')[0];
+          const type = profile?.user_type || 'User';
+          const email = user.email;
+          const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2);
+          const displayType = type.charAt(0).toUpperCase() + type.slice(1);
+
+          document.getElementById('profile-avatar').textContent = initials;
+          document.getElementById('profile-display-name').textContent = name;
+          document.getElementById('profile-display-type').textContent = displayType;
+          document.getElementById('dd-name').textContent = name;
+          document.getElementById('dd-email').textContent = email;
+
+          const badge = document.getElementById('dd-badge');
+          badge.textContent = displayType;
+          badge.className = 'dh-badge ' + type.toLowerCase();
+
+          if (type.toLowerCase() === 'worker') {
+            const postLink = document.getElementById('post-job-link');
+            const postLinkMobile = document.getElementById('post-job-link-mobile');
+            if (postLink) postLink.style.display = 'none';
+            if (postLinkMobile) postLinkMobile.style.display = 'none';
+          }
+
+          document.getElementById('profile-toggle').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('profile-dropdown').classList.toggle('show');
+          });
+
+          document.addEventListener('click', () => {
+            document.getElementById('profile-dropdown').classList.remove('show');
+          });
+
+          document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const btn = e.currentTarget;
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Logging out...";
+            try {
+              await logoutUser();
+            } catch (err) {
+              console.error("Logout failed:", err);
+              btn.innerHTML = originalHtml;
             }
-        })();
-    </script>
+          });
+        } else {
+          loginBtnLink.style.display = '';
+          profileArea.style.display = 'none';
+        }
+      })();
+  </script>
+
 </body>
 
 </html>

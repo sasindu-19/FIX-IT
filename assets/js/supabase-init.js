@@ -22,6 +22,13 @@ async function getUserProfile(userId) {
 
 // Logout
 async function logoutUser() {
-    await supabaseClient.auth.signOut();
-    window.location.href = 'index.html';
+    try {
+        await supabaseClient.auth.signOut();
+    } catch (error) {
+        console.error("Error signing out of Supabase:", error);
+        // Force clear local storage if Supabase fails
+        localStorage.clear();
+        sessionStorage.clear();
+    }
+    window.location.href = 'login.html';
 }

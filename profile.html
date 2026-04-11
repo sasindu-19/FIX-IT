@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | FIX-IT</title>
+    <meta name="description" content="View and manage your FIX-IT profile, skills, and account settings.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="assets/css/profile.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="navbar">
+            <div class="nav-logo"><a href="index.html">FIX-IT</a></div>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="jobs.html">Find Work</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+            <a href="index.html" class="nav-back-btn" id="back-btn">
+                <i class='bx bx-arrow-back'></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="profile-page" id="main-content">
+
+        <!-- NOT LOGGED IN -->
+        <div class="not-logged-in" id="not-logged-in-state" style="display:none;">
+            <i class='bx bxs-lock-alt'></i>
+            <h2>Access Restricted</h2>
+            <p>You need to be logged in to view your profile.</p>
+            <a href="login.html" class="btn btn-primary">
+                <i class='bx bx-log-in'></i> Go to Login
+            </a>
+        </div>
+
+        <!-- PROFILE CONTENT (hidden until loaded) -->
+        <div id="profile-content" style="display:none;">
+
+            <!-- HERO CARD -->
+            <div class="profile-hero">
+                <div class="profile-banner">
+                    <div class="profile-banner-overlay"></div>
+                </div>
+                <div class="profile-info-bar">
+                    <div class="big-avatar" id="big-avatar">?</div>
+                    <div class="profile-meta">
+                        <h2 id="hero-name">Loading...</h2>
+                        <div class="user-email" id="hero-email">—</div>
+                        <div id="hero-badge"></div>
+                    </div>
+                    <div class="profile-actions" style="align-self:center; margin-top:0;">
+                        <button class="btn btn-primary btn-sm" id="edit-toggle-btn" onclick="toggleEdit()">
+                            <i class='bx bx-edit'></i> Edit Profile
+                        </button>
+                        <button class="btn btn-danger btn-sm" id="logout-btn-profile">
+                            <i class='bx bx-log-out'></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARDS GRID -->
+            <div class="cards-grid">
+
+                <!-- Account Details -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bxs-user'></i></div>
+                        <span class="card-title">Account Details</span>
+                    </div>
+
+                    <!-- VIEW MODE -->
+                    <div id="view-mode">
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-id-card'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">Full Name</div>
+                                <div class="field-value" id="view-name">—</div>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-envelope'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">Email Address</div>
+                                <div class="field-value" id="view-email">—</div>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-phone'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">Phone Number</div>
+                                <div class="field-value muted" id="view-phone">Not provided</div>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-badge-check'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">Account Type</div>
+                                <div class="field-value" id="view-type">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDIT MODE -->
+                    <div class="edit-form" id="edit-mode">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="edit-name" class="form-input" placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="edit-email" class="form-input" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="edit-phone" class="form-input" placeholder="+94 71 234 5678">
+                        </div>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button class="btn btn-primary" id="save-btn" onclick="saveProfile()">
+                                <i class='bx bx-save'></i> Save Changes
+                            </button>
+                            <button class="btn btn-ghost" onclick="cancelEdit()">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bx-bar-chart-alt-2'></i></div>
+                        <span class="card-title">Account Stats</span>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-days">—</div>
+                            <div class="stat-label">Days Active</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-joined">—</div>
+                            <div class="stat-label">Member Since</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">✓</div>
+                            <div class="stat-label">Email Verified</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-type-icon">—</div>
+                            <div class="stat-label" id="stat-type-label">Account Type</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Security -->
+                <div class="info-card card-full">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bx-shield-quarter'></i></div>
+                        <span class="card-title">Security</span>
+                    </div>
+                    <div
+                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                        <div>
+                            <div style="font-size:0.95rem; font-weight:500; color:var(--text);">Password</div>
+                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Change your account
+                                password</div>
+                        </div>
+                        <a href="login.html?mode=reset" class="btn btn-ghost btn-sm">
+                            <i class='bx bx-key'></i> Change Password
+                        </a>
+                    </div>
+                    <div style="height:1px; background:rgba(255,255,255,0.05); margin:20px 0;"></div>
+                    <div
+                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                        <div>
+                            <div style="font-size:0.95rem; font-weight:500; color:var(--text);">Two-Factor Auth</div>
+                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Add an extra layer of
+                                security</div>
+                        </div>
+                        <span
+                            style="font-size:0.8rem; color:var(--muted); background:rgba(255,255,255,0.05); padding:6px 14px; border-radius:20px; border:1px solid rgba(255,255,255,0.08);">
+                            Coming Soon
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="info-card card-full danger-zone">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bx-error-circle'></i></div>
+                        <span class="card-title" style="color:var(--danger);">Danger Zone</span>
+                    </div>
+                    <div
+                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                        <div>
+                            <div style="font-size:0.95rem; font-weight:500; color:var(--text);">Logout from FIX-IT</div>
+                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Sign out from your
+                                current session</div>
+                        </div>
+                        <button class="btn btn-danger btn-sm" id="logout-btn-danger">
+                            <i class='bx bx-log-out'></i> Sign Out
+                        </button>
+                    </div>
+                </div>
+
+            </div><!-- /cards-grid -->
+        </div><!-- /profile-content -->
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-init.js"></script>
+    <script>
+        // ============================================
+        // Profile Page Logic
+        // ============================================
+        let currentUser = null;
+        let currentProfile = null;
+
+        // ─── TOAST ───
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'bx-check-circle' : 'bx-error-circle';
+            const color = type === 'success' ? '#22c55e' : '#ff4d6d';
+            toast.innerHTML = `
+                <i class='bx ${icon}' style="font-size:20px; color:${color};"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // ─── POPULATE UI ───
+        function populateUI(user, profile) {
+            const name = profile?.full_name || user.email.split('@')[0];
+            const email = user.email;
+            const phone = profile?.phone_number || '';
+            const type = profile?.user_type || 'user';
+            const displayType = type.charAt(0).toUpperCase() + type.slice(1);
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+            // Hero section
+            document.getElementById('big-avatar').textContent = initials;
+            document.getElementById('hero-name').textContent = name;
+            document.getElementById('hero-email').textContent = email;
+
+            const badge = document.getElementById('hero-badge');
+            badge.innerHTML = `<span class="user-type-badge ${type}"><i class='bx bxs-circle' style="font-size:8px;"></i> ${displayType}</span>`;
+
+            // View fields
+            document.getElementById('view-name').textContent = name;
+            document.getElementById('view-email').textContent = email;
+            document.getElementById('view-phone').textContent = phone || 'Not provided';
+            document.getElementById('view-phone').className = phone ? 'field-value' : 'field-value muted';
+            document.getElementById('view-type').textContent = displayType;
+
+            // Edit fields
+            document.getElementById('edit-name').value = profile?.full_name || '';
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-phone').value = phone;
+
+            // Stats
+            const joined = new Date(profile?.created_at || user.created_at);
+            const daysActive = Math.floor((Date.now() - joined.getTime()) / (1000 * 60 * 60 * 24));
+            const monthStr = joined.toLocaleString('default', { month: 'short', year: 'numeric' });
+
+            document.getElementById('stat-days').textContent = daysActive;
+            document.getElementById('stat-joined').textContent = monthStr;
+
+            const typeEmoji = { client: '💼', worker: '🔧' };
+            document.getElementById('stat-type-icon').textContent = typeEmoji[type] || '👤';
+            document.getElementById('stat-type-label').textContent = displayType;
+        }
+
+        // ─── EDIT TOGGLE ───
+        function toggleEdit() {
+            const editMode = document.getElementById('edit-mode');
+            const viewMode = document.getElementById('view-mode');
+            const btn = document.getElementById('edit-toggle-btn');
+            const isEditing = editMode.classList.contains('active');
+
+            if (isEditing) {
+                cancelEdit();
+            } else {
+                viewMode.style.display = 'none';
+                editMode.classList.add('active');
+                btn.innerHTML = "<i class='bx bx-x'></i> Cancel";
+                btn.className = 'btn btn-ghost btn-sm';
+            }
+        }
+
+        function cancelEdit() {
+            document.getElementById('edit-mode').classList.remove('active');
+            document.getElementById('view-mode').style.display = 'block';
+            const btn = document.getElementById('edit-toggle-btn');
+            btn.innerHTML = "<i class='bx bx-edit'></i> Edit Profile";
+            btn.className = 'btn btn-primary btn-sm';
+        }
+
+        // ─── SAVE PROFILE ───
+        async function saveProfile() {
+            const btn = document.getElementById('save-btn');
+            const name = document.getElementById('edit-name').value.trim();
+            const phone = document.getElementById('edit-phone').value.trim();
+
+            if (!name) {
+                showToast('Full name cannot be empty!', 'error');
+                return;
+            }
+
+            btn.innerHTML = `<span class="spinner"></span> Saving...`;
+            btn.disabled = true;
+
+            try {
+                const { error } = await supabaseClient
+                    .from('profiles')
+                    .update({ full_name: name, phone_number: phone })
+                    .eq('id', currentUser.id);
+
+                if (error) throw error;
+
+                // Refresh profile data
+                currentProfile = { ...currentProfile, full_name: name, phone_number: phone };
+                populateUI(currentUser, currentProfile);
+                cancelEdit();
+                showToast('Profile updated successfully!', 'success');
+            } catch (err) {
+                console.error('Save error:', err);
+                showToast('Failed to save. Try again.', 'error');
+            } finally {
+                btn.innerHTML = "<i class='bx bx-save'></i> Save Changes";
+                btn.disabled = false;
+            }
+        }
+
+        // ─── LOGOUT ───
+        async function handleLogout(btn) {
+            const original = btn.innerHTML;
+            btn.innerHTML = `<span class="spinner"></span> Logging out...`;
+            btn.disabled = true;
+            try {
+                await logoutUser();
+            } catch {
+                btn.innerHTML = original;
+                btn.disabled = false;
+            }
+        }
+
+        // ─── INIT ───
+        (async () => {
+            currentUser = await getCurrentUser();
+
+            if (!currentUser) {
+                document.getElementById('not-logged-in-state').style.display = 'flex';
+                return;
+            }
+
+            currentProfile = await getUserProfile(currentUser.id);
+            populateUI(currentUser, currentProfile);
+            document.getElementById('profile-content').style.display = 'block';
+
+            // Attach logout listeners
+            document.getElementById('logout-btn-danger').addEventListener('click', function () {
+                handleLogout(this);
+            });
+            document.getElementById('logout-btn-profile').addEventListener('click', function () {
+                handleLogout(this);
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

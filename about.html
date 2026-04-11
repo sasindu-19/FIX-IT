@@ -9,48 +9,113 @@
     <link href="https://cdn.boxicons.com/3.0.8/fonts/filled/boxicons-filled.min.css" rel="stylesheet">
     <!-- Brand Icons -->
     <link href="https://cdn.boxicons.com/3.0.8/fonts/brands/boxicons-brands.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
 <body>
 
-    <div class="banner">
+       <header>
         <div class="navbar">
-            <h1 class="logo"><a href="index.html">FIX-IT</a></h1>
-            <ul>
+            <div class="logo"><a href="index.html">FIX-IT</a></div>
+            <ul class="links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Find Work</a></li>
-                <li><a href="#">Post A Job</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-            </ul>
-            <a href="login.html"><button class="lg">Login</button></a>
+                <li><a href="jobs.html">Find Work</a></li>
+                <li><a href="post.html">Post a Job</a></li>
+                <li><a href="reviews.html">Reviews</a></li>   
+    </ul>
+             
+        <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>        
         </div>
 
+    <div class="dropdown_menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="jobs.html">Find Work</a></li>
+            <li><a href="post.html">Post a Job</a></li>
+            <li><a href="reviews.html">Reviews</a></li> 
+
+    </div>
+</header> 
+
+
+<section>
         <div class="content">
             <h1>About <span class="text600">Us</span></h1>
             <h3>We started FIX-IT to bridge the gap between local talent and immediate needs. Our mission is to provide
-                a <p>transparent, safe, and fast environment for the gig economy.</p>
+                a <br>ransparent, safe, and fast environment for thebr <br> gig economy.
             </h3>
+            <br>
+            <br>
+            <br>
+            <br>
 
-            <h1>Why Choose <span class="text600">FIX-IT?</span></h1>
+            <h1>Why Choose <span class="text600">FIX-IT ?</span></h1>
             <h3>We started FIX-IT to bridge the gap between local talent and immediate community needs. The old way of
-                finding help was slow, unsafe, and unreliable.</h3>
+                finding help was <br>slow, unsafe, and unreliable.</h3>
             <br>Background-checked professionals
             <br>Transparent, upfront pricing
             <br>24/7 customer support
             <br>Money-back guarantee</h3>
+        </div>
+    </section>
 
-        </div>
-        <div class="home-sci">
-            <a href="#"><i class="bxl bx-facebook"></i></a>
-            <a href="#"><i class="bxl bx-instagram"></i></a>
-            <a href="#"><i class="bxl bx-tiktok"></i></a>
-            <a href="https://api.whatsapp.com/send/?phone=%2B94762284597"><i class="bxl bx-whatsapp"></i></a>
-        </div>
+<footer class="footer">
+  <div class="footer-container">
 
-        <div class="und">
-            <h4>&copy; 2024 FIX-IT MarketPlace. All Rights Reserved</h4>
-        </div>
+    <img src="assets/images/logo.webp" alt="" class="logo">
+
+    <!-- Logo / Brand -->
+    <div class="footer-brand">
+      <h2>FIX-IT</h2>
+      <p>Connecting skills to opportunities. Get things done faster.</p>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="jobs.html">Find Work</a></li>
+        <li><a href="post.html">Post a Job</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+      </ul>
+    </div>
+
+    <!-- Social -->
+    <div class="footer-social">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>© 2026 FIX-IT. All rights reserved.</p>
+  </div>
+</footer>
+
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document. querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu. classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars'    
+        }
+    </script>
+
+
 
 </body>
-
 </html>
