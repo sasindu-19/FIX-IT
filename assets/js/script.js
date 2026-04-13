@@ -11,5 +11,5 @@ loginlink.onclick = () => {
 }
 
 function goToSignup() {
-    window.location.href = "pr.html";
+    window.location.href = "signup.html";
 }

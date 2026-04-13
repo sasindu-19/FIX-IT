@@ -343,25 +343,31 @@ body {
         padding-bottom: 20px;
         overflow-y: auto;
     }
-    .wrapper .bg-animate, .wrapper .bg-animate2 {
+
+    .wrapper .bg-animate,
+    .wrapper .bg-animate2 {
         display: none;
     }
+
     .wrapper .info-text {
-        display: none; 
+        display: none;
     }
+
     .wrapper .form-box {
         position: relative;
         width: 100%;
         height: auto;
     }
 
-    .wrapper .form-box.login, .wrapper .form-box.register {
+    .wrapper .form-box.login,
+    .wrapper .form-box.register {
         padding: 40px 20px;
     }
 
     .wrapper .form-box.login {
         display: flex;
     }
+
     .wrapper .form-box.register {
         display: none;
     }
@@ -369,6 +375,7 @@ body {
     .wrapper.active .form-box.login {
         display: none;
     }
+
     .wrapper.active .form-box.register {
         display: flex;
         pointer-events: auto;
@@ -378,7 +385,7 @@ body {
         margin-top: 0;
     }
 
-    .wrapper .form-box.login .animation, 
+    .wrapper .form-box.login .animation,
     .wrapper .form-box.register .animation {
         transition: none !important;
         transition-delay: 0s !important;
