@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | FIX-IT</title>
     <link rel="stylesheet" href="assets/css/signup.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-      
-    <div class="container">
+    <div id="page-content" style="display: none;">
+        <div class="container">
       <a href="login.html" class="back-btn">⬅ Back</a>
   <h1>Create your account</h1>
   <p class="subtitle">Join FIX-IT to find work or post jobs</p>
@@ -25,28 +27,60 @@
     <!-- Form -->
     <form>
       <div class="grid">
-        <input type="text" placeholder="Full Name">
-        <input type="text" placeholder="Phone Number">
+      <div class="grid">
+        <div style="display:flex; flex-direction:column; position:relative;"><input type="text" id="prof-fullname" placeholder="Full Name"></div>
+        <div style="display:flex; flex-direction:column; position:relative;"><input type="text" id="prof-phone" placeholder="Phone Number"></div>
       </div>
 
       <div class="grid">
-        <select>
-          <option>Gender</option>
-          <option>Male</option>
-          <option>Female</option>
-        </select>
+        <div style="display:flex; flex-direction:column; position:relative;">
+          <select id="prof-gender">
+            <option value="" disabled selected>Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
 
-        <input placeholder="Date of Birth" type="date">
+        <div style="display:flex; flex-direction:column; position:relative;">
+          <input placeholder="NIC Number" id="prof-nic" type="text" maxlength="12">
+        </div>
+      </div>
 
-        <select>
-          <option>Select District</option>
-        </select>
+      <div class="grid">
+        <div style="display:flex; flex-direction:column; position:relative;">
+          <select id="prof-province">
+            <option value="" disabled selected>Select Province</option>
+          </select>
+        </div>
+        <div style="display:flex; flex-direction:column; position:relative;">
+          <select id="prof-district" disabled>
+            <option value="" disabled selected>Select District</option>
+          </select>
+        </div>
+        <div style="display:flex; flex-direction:column; position:relative;">
+          <select id="prof-city" disabled>
+            <option value="" disabled selected>Select City</option>
+          </select>
+        </div>
       </div>
 
       <!-- Skills Section -->
       <div id="skillsSection" class="hidden">
-        <p class="label">Skills & Categories</p>
-        <input type="text" placeholder="Skills & Categories">
+        <p class="label" style="text-transform: uppercase;">Skills & Categories</p>
+        <div class="skills-container" id="skills-container">
+          <div class="skill-chip">Cleaning</div>
+          <div class="skill-chip">Painting</div>
+          <div class="skill-chip">Construction</div>
+          <div class="skill-chip">Loading / Unloading</div>
+          <div class="skill-chip">Gardening</div>
+          <div class="skill-chip">Cooking / Catering</div>
+          <div class="skill-chip">Delivery</div>
+          <div class="skill-chip">Security</div>
+          <div class="skill-chip">Electrician</div>
+          <div class="skill-chip">Plumbing</div>
+          <div class="skill-chip">Sewing / Tailoring</div>
+          <div class="skill-chip">Event Setup</div>
+        </div>
       </div>
 
       <!-- Business Section -->
@@ -60,20 +94,47 @@
 
 <input type="text" id="businessName" placeholder="Business Name (Optional)" class="hidden">     
  </div>
-<button class="btn">Continue →</button>
-<div class="container">
-  <label>
-    <input type="checkbox" id="agree" class="agreement">
-    <h5>I agree to the</h5><a href=""><h5>Terms & Data Policy</h5></a>
+
+<div class="agreement-container" style="margin: 20px 0; text-align: center;">
+  <label style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; width: 100%;">
+    <input type="checkbox" id="agree" class="agreement" style="width: auto; margin:0;">
+    <span style="font-size: 14px; font-weight: normal; color: #cbd5e1; display: inline-block;">
+      I agree to the <a href="#" style="color:#0ef; text-decoration: none;">Terms & Data Policy</a>
+    </span>
   </label>
-  <br>
-
 </div>
 
-    </form>
+<button type="submit" id="submitBtn" class="btn">Continue →</button>
+
+        </form>
+      </div>
+    </div>
   </div>
-</div>
-<script src="assets/js/signup.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/srilanka-locations.js"></script>
+  <script src="assets/js/supabase-init.js"></script>
+  <script>
+    (async () => {
+      const user = await getCurrentUser();
+      
+      if (!user) {
+        showAccessDenied(
+          'Login Required',
+          'You need to login first to set up your profile. Create an account or login to continue.',
+          'bxs-lock-alt',
+          [
+            { text: 'Login Now', href: 'login.html', cls: 'primary' },
+            { text: 'Go Home', href: 'index.html', cls: 'secondary' }
+          ]
+        );
+        return;
+      }
+      
+      document.getElementById('page-content').style.display = '';
+    })();
+  </script>
+  <script src="assets/js/signup.js"></script>
 
 </body>
 </html>

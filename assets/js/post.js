@@ -257,6 +257,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const profile = await getUserProfile(user.id);
+  
+  if (profile && (!profile.gender || !profile.dob)) {
+    window.location.href = 'signup.html';
+    return;
+  }
+
   const userType = profile?.user_type;
 
   if (userType !== 'client') {
@@ -276,25 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-// ── Access Denied overlay ──
-function showAccessDenied(title, message, icon, buttons) {
-  const overlay = document.createElement('div');
-  overlay.className = 'access-denied-overlay';
 
-  const btnsHtml = buttons.map(b =>
-    `<a href="${b.href}" class="ad-btn ${b.cls}">${b.text}</a>`
-  ).join('');
-
-  overlay.innerHTML = `
-    <div class="access-denied-card">
-      <div class="ad-icon"><i class='bx ${icon}'></i></div>
-      <h2>${title}</h2>
-      <p>${message}</p>
-      <div>${btnsHtml}</div>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-}
 
 
 // ============================================================

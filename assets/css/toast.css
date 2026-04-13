@@ -435,6 +435,7 @@
 .ad-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 12px 30px;
     border-radius: 30px;
@@ -445,7 +446,8 @@
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
     border: none;
-    margin: 0 5px;
+    margin: 8px 5px;
+    min-width: 140px;
 }
 
 .ad-btn:hover {

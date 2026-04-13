@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | FIX-IT</title>
     <meta name="description" content="View and manage your FIX-IT profile, skills, and account settings.">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="assets/css/profile.css">
@@ -21,7 +20,8 @@
             <div class="nav-logo"><a href="index.html">FIX-IT</a></div>
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
-                <li><a href="jobs.html">Find Work</a></li>
+                <li id="find-work-link"><a href="jobs.html">Find Work</a></li>
+                <li id="post-job-link"><a href="post.html">Post a Job</a></li>
                 <li><a href="reviews.html">Reviews</a></li>
             </ul>
             <a href="index.html" class="nav-back-btn" id="back-btn">
@@ -75,11 +75,11 @@
             <!-- CARDS GRID -->
             <div class="cards-grid">
 
-                <!-- Account Details -->
+                <!-- Personal Information -->
                 <div class="info-card">
                     <div class="card-header">
                         <div class="card-icon"><i class='bx bxs-user'></i></div>
-                        <span class="card-title">Account Details</span>
+                        <span class="card-title">Personal Information</span>
                     </div>
 
                     <!-- VIEW MODE -->
@@ -106,10 +106,24 @@
                             </div>
                         </div>
                         <div class="field-row">
-                            <div class="field-icon"><i class='bx bx-badge-check'></i></div>
+                            <div class="field-icon"><i class='bx bx-male-female'></i></div>
                             <div class="field-content">
-                                <div class="field-label">Account Type</div>
-                                <div class="field-value" id="view-type">—</div>
+                                <div class="field-label">Gender</div>
+                                <div class="field-value muted" id="view-gender">—</div>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-calendar'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">Date of Birth</div>
+                                <div class="field-value muted" id="view-dob">—</div>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-badge'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">NIC Number</div>
+                                <div class="field-value muted" id="view-nic">—</div>
                             </div>
                         </div>
                     </div>
@@ -126,20 +140,65 @@
                         </div>
                         <div class="form-group">
                             <label>Phone Number</label>
-                            <input type="tel" id="edit-phone" class="form-input" placeholder="+94 71 234 5678">
+                            <input type="tel" id="edit-phone" class="form-input" placeholder="07X XXX XXXX">
                         </div>
                         <div style="display:flex; gap:10px; flex-wrap:wrap;">
                             <button class="btn btn-primary" id="save-btn" onclick="saveProfile()">
                                 <i class='bx bx-save'></i> Save Changes
                             </button>
-                            <button class="btn btn-ghost" onclick="cancelEdit()">
-                                Cancel
-                            </button>
+                            <button class="btn btn-ghost" onclick="cancelEdit()">Cancel</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Stats Card -->
+                <!-- Location Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bx-map'></i></div>
+                        <span class="card-title">Location</span>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-icon"><i class='bx bx-buildings'></i></div>
+                        <div class="field-content">
+                            <div class="field-label">Province</div>
+                            <div class="field-value muted" id="view-province">—</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-icon"><i class='bx bx-building'></i></div>
+                        <div class="field-content">
+                            <div class="field-label">District</div>
+                            <div class="field-value muted" id="view-district">—</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-icon"><i class='bx bx-map-pin'></i></div>
+                        <div class="field-content">
+                            <div class="field-label">City</div>
+                            <div class="field-value muted" id="view-city">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills & Business Card -->
+                <div class="info-card card-full" id="skills-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bx-wrench'></i></div>
+                        <span class="card-title" id="skills-card-title">Skills & Categories</span>
+                    </div>
+                    <div id="view-skills-container"></div>
+                    <div id="view-business-container" style="display:none;">
+                        <div class="field-row">
+                            <div class="field-icon"><i class='bx bx-briefcase'></i></div>
+                            <div class="field-content">
+                                <div class="field-label">Business Name</div>
+                                <div class="field-value muted" id="view-business">—</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Stats -->
                 <div class="info-card">
                     <div class="card-header">
                         <div class="card-icon"><i class='bx bx-bar-chart-alt-2'></i></div>
@@ -165,33 +224,50 @@
                     </div>
                 </div>
 
+                <!-- Account Type Card -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class='bx bx-badge-check'></i></div>
+                        <span class="card-title">Account Type</span>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-icon"><i class='bx bx-user-pin'></i></div>
+                        <div class="field-content">
+                            <div class="field-label">Role</div>
+                            <div class="field-value" id="view-type">—</div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-icon"><i class='bx bx-check-shield'></i></div>
+                        <div class="field-content">
+                            <div class="field-label">Terms Agreed</div>
+                            <div class="field-value" id="view-terms">—</div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Account Security -->
                 <div class="info-card card-full">
                     <div class="card-header">
                         <div class="card-icon"><i class='bx bx-shield-quarter'></i></div>
                         <span class="card-title">Security</span>
                     </div>
-                    <div
-                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
                         <div>
                             <div style="font-size:0.95rem; font-weight:500; color:var(--text);">Password</div>
-                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Change your account
-                                password</div>
+                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Change your account password</div>
                         </div>
                         <a href="login.html?mode=reset" class="btn btn-ghost btn-sm">
                             <i class='bx bx-key'></i> Change Password
                         </a>
                     </div>
-                    <div style="height:1px; background:rgba(255,255,255,0.05); margin:20px 0;"></div>
-                    <div
-                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                    <div class="section-divider"></div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
                         <div>
                             <div style="font-size:0.95rem; font-weight:500; color:var(--text);">Two-Factor Auth</div>
-                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Add an extra layer of
-                                security</div>
+                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Add an extra layer of security</div>
                         </div>
-                        <span
-                            style="font-size:0.8rem; color:var(--muted); background:rgba(255,255,255,0.05); padding:6px 14px; border-radius:20px; border:1px solid rgba(255,255,255,0.08);">
+                        <span style="font-size:0.8rem; color:var(--muted); background:rgba(255,255,255,0.05); padding:6px 14px; border-radius:20px; border:1px solid rgba(255,255,255,0.08);">
                             Coming Soon
                         </span>
                     </div>
@@ -203,12 +279,10 @@
                         <div class="card-icon"><i class='bx bx-error-circle'></i></div>
                         <span class="card-title" style="color:var(--danger);">Danger Zone</span>
                     </div>
-                    <div
-                        style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
                         <div>
                             <div style="font-size:0.95rem; font-weight:500; color:var(--text);">Logout from FIX-IT</div>
-                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Sign out from your
-                                current session</div>
+                            <div style="font-size:0.82rem; color:var(--muted); margin-top:3px;">Sign out from your current session</div>
                         </div>
                         <button class="btn btn-danger btn-sm" id="logout-btn-danger">
                             <i class='bx bx-log-out'></i> Sign Out
@@ -225,9 +299,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/supabase-init.js"></script>
     <script>
-        // ============================================
-        // Profile Page Logic
-        // ============================================
         let currentUser = null;
         let currentProfile = null;
 
@@ -238,10 +309,7 @@
             toast.className = `toast ${type}`;
             const icon = type === 'success' ? 'bx-check-circle' : 'bx-error-circle';
             const color = type === 'success' ? '#22c55e' : '#ff4d6d';
-            toast.innerHTML = `
-                <i class='bx ${icon}' style="font-size:20px; color:${color};"></i>
-                <span>${message}</span>
-            `;
+            toast.innerHTML = `<i class='bx ${icon}' style="font-size:20px; color:${color};"></i><span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
                 toast.style.animation = 'slideOut 0.3s ease forwards';
@@ -251,51 +319,120 @@
 
         // ─── POPULATE UI ───
         function populateUI(user, profile) {
-            const name = profile?.full_name || user.email.split('@')[0];
-            const email = user.email;
-            const phone = profile?.phone_number || '';
-            const type = profile?.user_type || 'user';
+            const name    = profile?.full_name || user.email.split('@')[0];
+            const email   = user.email;
+            const phone   = profile?.phone_number || '';
+            const type    = profile?.user_type || 'user';
+            const gender  = profile?.gender || '';
+            const nic     = profile?.nic || '';
+            const dob     = profile?.dob || '';
+            const province= profile?.province || '';
+            const district= profile?.district || '';
+            const city    = profile?.city || '';
+            const skills  = profile?.skills || [];
+            const bizName = profile?.business_name || '';
+            const agreed  = profile?.agreed_terms;
+
             const displayType = type.charAt(0).toUpperCase() + type.slice(1);
-            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const initials    = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
             // Hero section
             document.getElementById('big-avatar').textContent = initials;
-            document.getElementById('hero-name').textContent = name;
+            document.getElementById('hero-name').textContent  = name;
             document.getElementById('hero-email').textContent = email;
 
             const badge = document.getElementById('hero-badge');
             badge.innerHTML = `<span class="user-type-badge ${type}"><i class='bx bxs-circle' style="font-size:8px;"></i> ${displayType}</span>`;
 
-            // View fields
-            document.getElementById('view-name').textContent = name;
+            // Personal Info
+            document.getElementById('view-name').textContent  = name;
             document.getElementById('view-email').textContent = email;
-            document.getElementById('view-phone').textContent = phone || 'Not provided';
-            document.getElementById('view-phone').className = phone ? 'field-value' : 'field-value muted';
-            document.getElementById('view-type').textContent = displayType;
+            setField('view-phone',    phone,    'Not provided');
+            setField('view-gender',   gender,   '—');
+            setField('view-dob',      dob ? formatDate(dob) : '', '—');
+            setField('view-nic',      nic,      '—');
 
-            // Edit fields
-            document.getElementById('edit-name').value = profile?.full_name || '';
+            // Location
+            setField('view-province', province, '—');
+            setField('view-district', district, '—');
+            setField('view-city',     city,     '—');
+
+            // Type & Terms
+            document.getElementById('view-type').textContent = displayType;
+            document.getElementById('view-terms').textContent = agreed ? '✅ Agreed' : '❌ Not agreed';
+
+            // Skills (worker) or Business (client)
+            const skillsCard = document.getElementById('skills-card');
+            const skillsContainer = document.getElementById('view-skills-container');
+            const bizContainer    = document.getElementById('view-business-container');
+
+            if (type === 'worker') {
+                document.getElementById('skills-card-title').textContent = 'Skills & Categories';
+                if (skills.length > 0) {
+                    skillsContainer.innerHTML = `<div class="skills-display">${skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>`;
+                } else {
+                    skillsContainer.innerHTML = `<div class="field-value muted" style="margin-top:8px;">No skills added yet.</div>`;
+                }
+                bizContainer.style.display = 'none';
+            } else {
+                document.getElementById('skills-card-title').textContent = 'Business Information';
+                skillsContainer.innerHTML = '';
+                if (bizName) {
+                    bizContainer.style.display = 'block';
+                    setField('view-business', bizName, '—');
+                } else {
+                    skillsContainer.innerHTML = `<div class="field-value muted" style="margin-top:8px;">No business name added.</div>`;
+                }
+            }
+
+            // Edit mode fields
+            document.getElementById('edit-name').value  = profile?.full_name || '';
             document.getElementById('edit-email').value = email;
             document.getElementById('edit-phone').value = phone;
 
             // Stats
-            const joined = new Date(profile?.created_at || user.created_at);
-            const daysActive = Math.floor((Date.now() - joined.getTime()) / (1000 * 60 * 60 * 24));
-            const monthStr = joined.toLocaleString('default', { month: 'short', year: 'numeric' });
+            const joined    = new Date(profile?.created_at || user.created_at);
+            const daysActive= Math.floor((Date.now() - joined.getTime()) / (1000 * 60 * 60 * 24));
+            const monthStr  = joined.toLocaleString('default', { month: 'short', year: 'numeric' });
 
-            document.getElementById('stat-days').textContent = daysActive;
+            document.getElementById('stat-days').textContent   = daysActive;
             document.getElementById('stat-joined').textContent = monthStr;
 
             const typeEmoji = { client: '💼', worker: '🔧' };
             document.getElementById('stat-type-icon').textContent = typeEmoji[type] || '👤';
             document.getElementById('stat-type-label').textContent = displayType;
+
+            // Navigation bar restriction for worker
+            if (type === 'worker') {
+                const postLink = document.getElementById('post-job-link');
+                if (postLink) postLink.style.display = 'none';
+            }
+        }
+
+        // Format date nicely
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
+
+        // Helper: set text or show muted fallback
+        function setField(id, value, fallback) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (value) {
+                el.textContent = value;
+                el.classList.remove('muted');
+            } else {
+                el.textContent = fallback;
+                el.classList.add('muted');
+            }
         }
 
         // ─── EDIT TOGGLE ───
         function toggleEdit() {
             const editMode = document.getElementById('edit-mode');
             const viewMode = document.getElementById('view-mode');
-            const btn = document.getElementById('edit-toggle-btn');
+            const btn      = document.getElementById('edit-toggle-btn');
             const isEditing = editMode.classList.contains('active');
 
             if (isEditing) {
@@ -318,17 +455,21 @@
 
         // ─── SAVE PROFILE ───
         async function saveProfile() {
-            const btn = document.getElementById('save-btn');
-            const name = document.getElementById('edit-name').value.trim();
+            const btn   = document.getElementById('save-btn');
+            const name  = document.getElementById('edit-name').value.trim();
             const phone = document.getElementById('edit-phone').value.trim();
 
             if (!name) {
                 showToast('Full name cannot be empty!', 'error');
                 return;
             }
+            if (phone && !/^[0-9]{10}$/.test(phone.replace(/[^0-9]/g, ''))) {
+                showToast('Please enter a valid 10-digit phone number.', 'error');
+                return;
+            }
 
             btn.innerHTML = `<span class="spinner"></span> Saving...`;
-            btn.disabled = true;
+            btn.disabled  = true;
 
             try {
                 const { error } = await supabaseClient
@@ -338,7 +479,6 @@
 
                 if (error) throw error;
 
-                // Refresh profile data
                 currentProfile = { ...currentProfile, full_name: name, phone_number: phone };
                 populateUI(currentUser, currentProfile);
                 cancelEdit();
@@ -348,20 +488,20 @@
                 showToast('Failed to save. Try again.', 'error');
             } finally {
                 btn.innerHTML = "<i class='bx bx-save'></i> Save Changes";
-                btn.disabled = false;
+                btn.disabled  = false;
             }
         }
 
         // ─── LOGOUT ───
         async function handleLogout(btn) {
             const original = btn.innerHTML;
-            btn.innerHTML = `<span class="spinner"></span> Logging out...`;
-            btn.disabled = true;
+            btn.innerHTML  = `<span class="spinner"></span> Logging out...`;
+            btn.disabled   = true;
             try {
                 await logoutUser();
             } catch {
                 btn.innerHTML = original;
-                btn.disabled = false;
+                btn.disabled  = false;
             }
         }
 
@@ -378,7 +518,6 @@
             populateUI(currentUser, currentProfile);
             document.getElementById('profile-content').style.display = 'block';
 
-            // Attach logout listeners
             document.getElementById('logout-btn-danger').addEventListener('click', function () {
                 handleLogout(this);
             });

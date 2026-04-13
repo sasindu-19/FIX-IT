@@ -191,16 +191,8 @@ if (registerForm) {
             return;
         }
 
-        const fullName = document.getElementById('reg-name').value;
-        const phone = document.getElementById('reg-phone').value;
-        const type = document.getElementById('reg-type').value;
         const email = regEmail.value;
         const password = regPassword.value;
-
-        if (!type) {
-            showToast('Please select a user type (Client or Worker)', 'warning');
-            return;
-        }
 
         const btn = registerForm.querySelector('.btn');
         btn.disabled = true;
@@ -210,11 +202,7 @@ if (registerForm) {
             email: email,
             password: password,
             options: {
-                data: {
-                    full_name: fullName,
-                    phone_number: phone,
-                    user_type: type
-                }
+                emailRedirectTo: window.location.origin + '/signup.html'
             }
         });
 
@@ -234,7 +222,7 @@ if (registerForm) {
             // Email confirmation is OFF — user is auto-logged in
             showToast('Account created successfully! Redirecting...', 'success');
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'signup.html';
             }, 1200);
         } else {
             // Email confirmation is ON — show check-email modal

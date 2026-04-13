@@ -19,7 +19,7 @@
       <div class="logo"><a href="#">FIX-IT</a></div>
       <ul class="links">
         <li><a href="about.html">About</a></li>
-        <li><a href="jobs.html">Find Work</a></li>
+        <li id="find-work-link"><a href="jobs.html">Find Work</a></li>
         <li id="post-job-link"><a href="post.html">Post a Job</a></li>
         <li><a href="reviews.html">Reviews</a></li>
       </ul>
@@ -61,7 +61,7 @@
 
     <div class="dropdown_menu">
       <li><a href="about.html">About</a></li>
-      <li><a href="jobs.html">Find Work</a></li>
+      <li id="find-work-link-mobile"><a href="jobs.html">Find Work</a></li>
       <li id="post-job-link-mobile"><a href="post.html">Post a Job</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li id="login-btn-link-mobile" style="padding: 15px 0; border-bottom: none;"><a href="login.html" style="background-color: rgb(150, 150, 245); color: #fff; margin: 0 auto; width: 80%; padding: 0.8rem 0; border-radius: 20px; text-align: center; font-weight: bold; display: block;">Login</a></li>
@@ -215,6 +215,10 @@
           profileArea.style.display = 'flex';
 
           const profile = await getUserProfile(user.id);
+          if (profile && (!profile.gender || !profile.dob)) {
+            window.location.href = 'signup.html';
+            return;
+          }
           const name = profile?.full_name || user.email.split('@')[0];
           const type = profile?.user_type || 'User';
           const email = user.email;
