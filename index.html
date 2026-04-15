@@ -166,7 +166,7 @@
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="jobs.html">Find Work</a></li>
-          <li><a href="post.html">Post a Job</a></li>
+          <li id="post-job-link-footer"><a href="post.html">Post a Job</a></li>
           <li><a href="reviews.html">Reviews</a></li>
         </ul>
       </div>
@@ -238,8 +238,10 @@
           if (type.toLowerCase() === 'worker') {
             const postLink = document.getElementById('post-job-link');
             const postLinkMobile = document.getElementById('post-job-link-mobile');
+            const postLinkFooter = document.getElementById('post-job-link-footer');
             if (postLink) postLink.style.display = 'none';
             if (postLinkMobile) postLinkMobile.style.display = 'none';
+            if (postLinkFooter) postLinkFooter.style.display = 'none';
           }
 
           document.getElementById('profile-toggle').addEventListener('click', (e) => {

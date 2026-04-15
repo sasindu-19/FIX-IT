@@ -22,7 +22,7 @@
             <ul class="links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="jobs.html">Find Work</a></li>
-                <li><a href="post.html">Post a Job</a></li>
+                <li id="post-job-link"><a href="post.html">Post a Job</a></li>
                 <li><a href="reviews.html">Reviews</a></li>   
     </ul>
              
@@ -33,7 +33,7 @@
     <div class="dropdown_menu">
             <li><a href="index.html">Home</a></li>
             <li><a href="jobs.html">Find Work</a></li>
-            <li><a href="post.html">Post a Job</a></li>
+            <li id="post-job-link-mobile"><a href="post.html">Post a Job</a></li>
             <li><a href="reviews.html">Reviews</a></li> 
     </div>
 
@@ -78,7 +78,7 @@
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="jobs.html">Find Work</a></li>
-        <li><a href="post.html">Post a Job</a></li>
+        <li id="post-job-link-footer"><a href="post.html">Post a Job</a></li>
         <li><a href="reviews.html">Reviews</a></li>
       </ul>
     </div>
@@ -115,5 +115,25 @@
     }
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-init.js"></script>
+  <script>
+      (async () => {
+        const user = await getCurrentUser();
+        if (user) {
+          const profile = await getUserProfile(user.id);
+          const type = profile?.user_type || 'User';
+
+          if (type.toLowerCase() === 'worker') {
+            const postLink = document.getElementById('post-job-link');
+            const postLinkMobile = document.getElementById('post-job-link-mobile');
+            const postLinkFooter = document.getElementById('post-job-link-footer');
+            if (postLink) postLink.style.display = 'none';
+            if (postLinkMobile) postLinkMobile.style.display = 'none';
+            if (postLinkFooter) postLinkFooter.style.display = 'none';
+          }
+        }
+      })();
+  </script>
 </body>
 </html>
