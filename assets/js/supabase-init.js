@@ -68,3 +68,11 @@ function showAccessDenied(title, message, icon, buttons) {
     `;
     document.body.appendChild(overlay);
 }
+
+// Global utility for input sanitization to prevent XSS
+function sanitizeInput(str) {
+    if (typeof str !== 'string') return str;
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}

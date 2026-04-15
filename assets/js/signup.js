@@ -197,17 +197,17 @@ button.addEventListener('click', async (e) => {
 
   // Gather values
   const userRole = findWork.classList.contains('active') ? 'worker' : 'client';
-  const fullName = document.getElementById('prof-fullname').value.trim();
-  const phone = document.getElementById('prof-phone').value.trim();
-  const gender = document.getElementById('prof-gender').value;
-  const nic = document.getElementById('prof-nic').value.trim();
-  const province = document.getElementById('prof-province').value;
-  const district = document.getElementById('prof-district').value;
-  const city = document.getElementById('prof-city').value;
+  const fullName = sanitizeInput(document.getElementById('prof-fullname').value.trim());
+  const phone = sanitizeInput(document.getElementById('prof-phone').value.trim());
+  const gender = sanitizeInput(document.getElementById('prof-gender').value);
+  const nic = sanitizeInput(document.getElementById('prof-nic').value.trim());
+  const province = sanitizeInput(document.getElementById('prof-province').value);
+  const district = sanitizeInput(document.getElementById('prof-district').value);
+  const city = sanitizeInput(document.getElementById('prof-city').value);
   
   const isBusiness = registeredBtn.classList.contains('active');
-  const bizName = isBusiness ? document.getElementById('businessName').value.trim() : null;
-  const skillsArray = Array.from(selectedSkills);
+  const bizName = isBusiness ? sanitizeInput(document.getElementById('businessName').value.trim()) : null;
+  const skillsArray = Array.from(selectedSkills).map(s => sanitizeInput(s));
 
   // Strict Validation
   if (!fullName || !phone) {

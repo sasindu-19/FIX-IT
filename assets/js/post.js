@@ -291,18 +291,18 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('jobForm')?.addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const title = document.getElementById('jobTitle').value.trim();
-  const desc = document.getElementById('description').value.trim();
-  const category = document.getElementById('category').value;
-  const budget = document.getElementById('payRate').value;
-  const province = document.getElementById('province').value;
-  const district = document.getElementById('district').value;
-  const city = document.getElementById('city').value;
+  const title = sanitizeInput(document.getElementById('jobTitle').value.trim());
+  const desc = sanitizeInput(document.getElementById('description').value.trim());
+  const category = sanitizeInput(document.getElementById('category').value);
+  const budget = sanitizeInput(document.getElementById('payRate').value);
+  const province = sanitizeInput(document.getElementById('province').value);
+  const district = sanitizeInput(document.getElementById('district').value);
+  const city = sanitizeInput(document.getElementById('city').value);
   const diff = document.querySelector('.diff-card.active')?.dataset.value || 'Easy';
   const gender = document.querySelector('#genderGroup .active')?.dataset.value || 'Any Gender';
   const posting = document.querySelector('#postingGroup .active')?.dataset.value || 'Individual';
-  const bizReg = document.getElementById('bizReg')?.value || '';
-  const minAge = document.getElementById('minAge').value;
+  const bizReg = sanitizeInput(document.getElementById('bizReg')?.value || '');
+  const minAge = sanitizeInput(document.getElementById('minAge').value);
   const workers = document.getElementById('c-val').textContent;
 
   // ── Run all validations, collect failures ──
@@ -330,10 +330,51 @@ document.getElementById('jobForm')?.addEventListener('submit', async function (e
     return;
   }
 
-  // ── TODO: Save to Supabase jobs table ──
-  const jobData = { title, desc, category, budget, province, district, city, diff, gender, posting, bizReg, minAge, workers };
-  console.log('Job Post Data:', jobData);
+  const user = await getCurrentUser();
+  if (!user) {
+    showToast('You must be logged in to post a job.', 'error');
+    return;
+  }
 
-  showToast('✅ Job posted successfully!', 'success', 5000);
-  setTimeout(() => this.reset(), 500);
+  // ── Save to Supabase jobs table ──
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Posting...';
+  submitBtn.disabled = true;
+
+  try {
+    const jobData = { 
+      title: title, 
+      description: desc, 
+      category: category, 
+      budget: budget, 
+      province: province, 
+      district: district, 
+      city: city, 
+      difficulty: diff, 
+      target_gender: gender, 
+      posting_type: posting, 
+      biz_reg: bizReg, 
+      min_age: minAge, 
+      workers_needed: workers,
+      user_id: user.id
+    };
+    
+    const { error } = await supabaseClient.from('jobs').insert([jobData]);
+
+    if (error) throw error;
+
+    showToast('✅ Job posted successfully!', 'success', 5000);
+    setTimeout(() => {
+      this.reset();
+      window.location.href = 'jobs.html';
+    }, 1500);
+
+  } catch (err) {
+    console.error('Error posting job:', err);
+    showToast(`Error: ${err.message}`, 'error', 0);
+  } finally {
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }
 });
