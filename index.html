@@ -64,7 +64,9 @@
       <li id="find-work-link-mobile"><a href="jobs.html">Find Work</a></li>
       <li id="post-job-link-mobile"><a href="post.html">Post a Job</a></li>
       <li><a href="reviews.html">Reviews</a></li>
-      <li id="login-btn-link-mobile" style="padding: 15px 0; border-bottom: none;"><a href="login.html" style="background-color: rgb(150, 150, 245); color: #fff; margin: 0 auto; width: 80%; padding: 0.8rem 0; border-radius: 20px; text-align: center; font-weight: bold; display: block;">Login</a></li>
+      <li id="login-btn-link-mobile" style="padding: 15px 0; border-bottom: none;"><a href="login.html"
+          style="background-color: rgb(150, 150, 245); color: #fff; margin: 0 auto; width: 80%; padding: 0.8rem 0; border-radius: 20px; text-align: center; font-weight: bold; display: block;">Login</a>
+      </li>
     </div>
   </header>
 
@@ -87,6 +89,8 @@
       </div>
     </div>
   </section>
+
+
 
 
   <section class="how-it-works">
@@ -117,7 +121,6 @@
       </div>
     </div>
   </section>
-
 
   <section class="features">
     <div class="feature-box">
@@ -151,6 +154,38 @@
     </div>
   </section>
 
+  <section class="blog-section">
+    <div class="containeroi">
+
+      <!-- Image Side -->
+      <div class="image-box2">
+        <div class="shape2">
+          <img src="assets/images/stew.webp">
+        </div>
+      </div>
+
+      <!-- Text Side -->
+      <div class="contentooi">
+        <p>
+          "Your work is going to fill a large part
+          of your life, and the only way to be
+          truly satisfied is to do what you believe
+          is great work. And the only way to do
+          great work is to love what you do.
+          If you haven't found it yet,
+          keep looking. Don't settle.
+          As with all matters of the heart,
+          you'll know when you find it.
+          And, like any great relationship,
+          it just gets better and better
+          as the years roll on.
+          So keep looking until you find it.
+          Don't settle."
+          <a href="#">-Steven Paul Jobs-</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="footer-container">
@@ -166,7 +201,7 @@
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="jobs.html">Find Work</a></li>
-          <li id="post-job-link-footer"><a href="post.html">Post a Job</a></li>
+          <li><a href="post.html">Post a Job</a></li>
           <li><a href="reviews.html">Reviews</a></li>
         </ul>
       </div>
@@ -238,10 +273,8 @@
           if (type.toLowerCase() === 'worker') {
             const postLink = document.getElementById('post-job-link');
             const postLinkMobile = document.getElementById('post-job-link-mobile');
-            const postLinkFooter = document.getElementById('post-job-link-footer');
             if (postLink) postLink.style.display = 'none';
             if (postLinkMobile) postLinkMobile.style.display = 'none';
-            if (postLinkFooter) postLinkFooter.style.display = 'none';
           }
 
           document.getElementById('profile-toggle').addEventListener('click', (e) => {
